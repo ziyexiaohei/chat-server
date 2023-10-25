@@ -10,10 +10,18 @@ class ChatHandler implements URLHandler {
     // expect /chat?user=<name>&message=<string>
     else if (url.getPath().equals("/chat")) {
       String[] params = url.getQuery().split("&");
-      String user = params[0].split("=")[1];
-      String message = params[1].split("=")[1];
-      this.chatHistory += user + ": " + message + "\n\n";
-      return this.chatHistory; 
+      String[] shouldBeUser = params[0].split("=");
+      String[] shouldBeMessage = params[1].split("=");
+      System.out.println(shouldBeUser[0].equals("user") + " " + shouldBeMessage[0].equals("message"));
+      if (shouldBeUser[0].equals("user") && shouldBeMessage[0].equals("message")) {
+        String user = shouldBeUser[1];
+        String message = shouldBeMessage[1];
+        this.chatHistory += user + ": " + message + "\n\n";
+        return this.chatHistory; 
+      }
+      else {
+        return "Invalid parameters: " + String.join("&", params);
+      }
     }
     return "404 Not Found";
   }
