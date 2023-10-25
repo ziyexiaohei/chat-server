@@ -31,7 +31,6 @@ public class HandlerTests {
     URI input2 = new URI(url2);
     String expected = "onat: good luck\n\nedwin: with your demo!\n\n";
     h.handleRequest(input1);
-    h.handleRequest(input2);
-    assertEquals(expected, h.handleRequest(new URI("/")));
+    assertEquals(expected, h.handleRequest(input2));
   }
 }

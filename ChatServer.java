@@ -5,7 +5,7 @@ class ChatHandler implements URLHandler {
   String chatHistory = "";
   public String handleRequest(URI url) {
     if (url.getPath().equals("/")) {
-      return this.chatHistory;
+      return "You fill this in";
     }
     // expect /chat?user=<name>&message=<string>
     else if (url.getPath().equals("/chat")) {
