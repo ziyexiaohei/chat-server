@@ -4,11 +4,10 @@ import java.net.URI;
 class ChatHandler implements URLHandler {
   String chatHistory = "";
   public String handleRequest(URI url) {
-    if (url.getPath().equals("/")) {
-      return "You fill this in";
-    }
+
+
     // expect /chat?user=<name>&message=<string>
-    else if (url.getPath().equals("/chat")) {
+    if (url.getPath().equals("/chat")) {
       String[] params = url.getQuery().split("&");
       String[] shouldBeUser = params[0].split("=");
       String[] shouldBeMessage = params[1].split("=");
