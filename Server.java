@@ -7,6 +7,10 @@ import java.io.OutputStream;
 import java.net.InetSocketAddress;
 import java.net.URI;
 
+import java.io.BufferedWriter;
+import java.io.FileWriter;
+import java.io.PrintWriter;
+
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpServer;
@@ -23,7 +27,17 @@ class ServerHttpHandler implements HttpHandler {
     public void handle(final HttpExchange exchange) throws IOException {
         // form return body after being handled by program
         try {
-            String ret = handler.handleRequest(exchange.getRequestURI());
+            URI uri = exchange.getRequestURI();
+
+            try(FileWriter fw = new FileWriter("session.log", true);
+              BufferedWriter bw = new BufferedWriter(fw);
+              PrintWriter out = new PrintWriter(bw)) {
+              out.println(uri.toString());
+            } catch (IOException e) {
+              //exception handling left as an exercise for the reader
+            }
+
+            String ret = handler.handleRequest(uri);
             // form the return string and write it on the browser
             exchange.sendResponseHeaders(200, ret.getBytes().length);
             OutputStream os = exchange.getResponseBody();
