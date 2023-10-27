@@ -11,7 +11,6 @@ class ChatHandler implements URLHandler {
       String[] params = url.getQuery().split("&");
       String[] shouldBeUser = params[0].split("=");
       String[] shouldBeMessage = params[1].split("=");
-      System.out.println(shouldBeUser[0].equals("user") + " " + shouldBeMessage[0].equals("message"));
       if (shouldBeUser[0].equals("user") && shouldBeMessage[0].equals("message")) {
         String user = shouldBeUser[1];
         String message = shouldBeMessage[1];
