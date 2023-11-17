@@ -22,6 +22,8 @@ class ChatHandler implements URLHandler {
       } else {
         return "Invalid parameters: " + String.join("&", params);
       }
+    } else if (url.getPath().equals("/")) {
+      return this.chatHistory;
     }
     // expect /retrieve-history?file=<name>
     else if (url.getPath().equals("/retrieve-history")) {
@@ -65,8 +67,8 @@ class ChatHandler implements URLHandler {
 }
 
 class ChatServer {
-    public static void main(String[] args) throws IOException {
-      int port = Integer.parseInt(args[0]);
-      Server.start(port, new ChatHandler());
-    }
+  public static void main(String[] args) throws IOException {
+    int port = Integer.parseInt(args[0]);
+    Server.start(port, new ChatHandler());
   }
+}
