@@ -27,7 +27,7 @@ class ChatHandler implements URLHandler {
       return this.chatHistory;
     }
     // expect /retrieve-history?file=<name>
-    else if (url.getPath().equals("/retreive-history")) {
+    else if (url.getPath().equals("/retrieve-history")) {
       String[] params = url.getQuery().split("&");
       String[] shouldBeFile = params[0].split("=");
       if (shouldBeFile[0].equals("file")) {
