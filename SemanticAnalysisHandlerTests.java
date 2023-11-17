@@ -2,7 +2,7 @@ import static org.junit.Assert.*;
 import org.junit.*;
 import java.net.URI;
 
-public class HandlerTests {
+public class SemanticAnalysisHandlerTests {
   @Test
   public void handleRequest1() throws Exception {
     ChatHandler h = new ChatHandler();
