@@ -13,16 +13,6 @@ public class HandlerTests {
   }
 
   @Test
-  public void handleRequest2() throws Exception {
-    ChatHandler h = new ChatHandler();
-    // NOTE: %20 is the way to put a space in the parameters of a URL
-    String url = "http://localhost:4000/chat?user=edwin&message=happy%20friday!";
-    URI input = new URI(url);
-    String expected = "edwin: happy friday!\n\n";
-    assertEquals(expected, h.handleRequest(input));
-  }
-
-  @Test
   public void handleRequestMulti() throws Exception {
     ChatHandler h = new ChatHandler();
     String url1 = "http://localhost:4000/chat?user=onat&message=good%20luck";
@@ -38,15 +28,19 @@ public class HandlerTests {
   public void handleRequestSemanticAnalysis() throws Exception {
     ChatHandler h = new ChatHandler();
     String url1 = "http://localhost:4000/chat?user=onat&message=😂";
-    // String url2 = "http://localhost:4000/chat?user=onat&message=doggy🥹!!!";
-    String url3 = "http://localhost:4000/semantic-analysis?user=onat";
+    String url2 = "http://localhost:4000/chat?user=onat&message=doggy🥹!!!";
+    String url3 = "http://localhost:4000/chat?user=onat&message=TGIThanksgiving";
+    String url4 = "http://localhost:4000/semantic-analysis?user=onat";
+
     URI input1 = new URI(url1);
-    // URI input2 = new URI(url2);
+    URI input2 = new URI(url2);
     URI input3 = new URI(url3);
-    String expected = "onat: 😂 This message has a LOL vibe.\n\n";
+    URI input4 = new URI(url4);
+    String expected = "onat: 😂 This message has a LOL vibe.\n\nonat: doggy🥹!!! This message has a awwww vibe. This message ends forcefully.\n\nonat: TGIThanksgiving\n\n";
 
     h.handleRequest(input1);
-    // h.handleRequest(input2);
-    assertEquals(expected, h.handleRequest(input3));
+    h.handleRequest(input2);
+    h.handleRequest(input3);
+    assertEquals(expected, h.handleRequest(input4));
   }
 }
